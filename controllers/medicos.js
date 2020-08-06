@@ -67,12 +67,29 @@ const crearMedico = async(req, res = response) => {
 
 const actualizarMedico = async(req, res = response) => {
 
+    const mid = req.params.id;
+
     try {
+
+        const medicoDB = await Medico.findById(mid);
+        if (!medicoDB) {
+            res.status(404).json({
+                ok: false,
+                msg: 'No se ha encontrado medico por id'
+            });
+        }
+
+        const cambiosMedico = {
+            ...req.body,
+            usuario: req.uid
+        };
+
+        const medicoActualizado = await Medico.findByIdAndUpdate(mid, cambiosMedico, { new: true });
 
 
         res.json({
             ok: true,
-            msg: 'actualizar'
+            medicoActualizado
         });
 
     } catch (error) {
@@ -87,11 +104,23 @@ const actualizarMedico = async(req, res = response) => {
 
 const borrarMedico = async(req, res = response) => {
 
+    const mid = req.params.id;
+
     try {
+
+        const medicoDB = await Medico.findById(mid);
+        if (!medicoDB) {
+            res.status(404).json({
+                ok: false,
+                msg: 'No se ha encontrado medico por id'
+            });
+        }
+
+        await Medico.findByIdAndDelete(mid);
 
         res.json({
             ok: true,
-            msg: 'actualizar'
+            msg: 'Medico borrado'
         });
 
 
