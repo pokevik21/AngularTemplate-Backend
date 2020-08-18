@@ -22,7 +22,7 @@ router.put('/:tabla/:id', [
 
 
 router.get('/:tabla/:arch', [
-        validarJWT
+        // validarJWT
     ],
     getArch);
 

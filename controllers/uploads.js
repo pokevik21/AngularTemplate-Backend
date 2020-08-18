@@ -88,7 +88,7 @@ const getArch = async(req, res = response) => {
         res.sendFile(pathImg);
     } else {
 
-        res.sendFile(path.join(__dirname, '../uploads/no-img.jpg'));
+        res.sendFile(path.join(__dirname, '../uploads/no-img.png'));
     }
 
 
