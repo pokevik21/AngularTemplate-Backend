@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 require('dotenv').config();
 var cors = require('cors');
@@ -26,6 +27,11 @@ app.use('/api/hospitales', require('./Routes/hospitales'));
 app.use('/api/medicos', require('./Routes/medicos'));
 app.use('/api/todo', require('./Routes/buscador'));
 app.use('/api/upload', require('./Routes/uploads'));
+
+//Lo último
+app.get('*', (req, res) => {
+    res.sendFile( path.resolve( __dirname, 'public/index.html' ));
+});
 
 
 app.listen(process.env.PORT, () => {
